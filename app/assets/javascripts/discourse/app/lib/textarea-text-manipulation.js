@@ -35,7 +35,7 @@ const FOUR_SPACES_INDENT = "4-spaces-indent";
 
 // Our head can be a static string or a function that returns a string
 // based on input (like for numbered lists).
-export function getHead(head, prev) {
+function getHead(head, prev) {
   if (typeof head === "string") {
     return [head, head.length];
   } else {
@@ -74,6 +74,10 @@ export default class TextareaTextManipulation {
 
   get value() {
     return this.textarea.value;
+  }
+
+  get allowPreview() {
+    return true;
   }
 
   // ensures textarea scroll position is correct
@@ -740,6 +744,7 @@ export default class TextareaTextManipulation {
     }
   }
 
+  @bind
   async inCodeBlock() {
     return inCodeBlock(
       this.$textarea.value ?? this.$textarea.val(),

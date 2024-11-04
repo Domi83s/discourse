@@ -5,6 +5,7 @@
 
 export const PLUGIN_API_VERSION = "1.39.0";
 
+import { registerRichEditorExtension } from "discourse/lib/composer/rich-editor-extensions";
 import $ from "jquery";
 import { h } from "virtual-dom";
 import { addAboutPageActivity } from "discourse/components/about-page";
@@ -3399,6 +3400,10 @@ class PluginApi {
    */
   registerMoreTopicsTab(tab) {
     registeredTabs.push(tab);
+  }
+
+  registerRichEditorExtension(extension) {
+    registerRichEditorExtension(extension);
   }
 
   #deprecatedWidgetOverride(widgetName, override) {
