@@ -560,6 +560,11 @@ export default function (options) {
     let cp = caretPosition(me[0]);
     const key = me[0].value[cp - 1];
 
+    // only continue if the caret is at the end of a word, like #line|<-
+    if (me[0].value[cp]?.match(/\S/)) {
+      return;
+    }
+
     if (options.key) {
       if (options.onKeyUp && key !== options.key) {
         let match = options.onKeyUp(me.val(), cp);
