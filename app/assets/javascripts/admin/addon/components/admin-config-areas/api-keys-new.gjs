@@ -89,13 +89,10 @@ export default class AdminConfigAreasApiKeysNew extends Component {
 
   @action
   async save(data) {
-    console.log(data);
     // const payload = { description: data.description };
-
     // if (this.username) {
     //   payload.username = this.username;
     // }
-
     // if (data.scope_mode === "granular") {
     //   // TODO
     // } else if (data.scope_mode === "read_only") {
@@ -103,7 +100,6 @@ export default class AdminConfigAreasApiKeysNew extends Component {
     //     (scope) => scope.key === "read"
     //   );
     // }
-
     // try {
     //   await this.store.createRecord("api-key").save(payload);
     //   this.router.transitionTo("adminApiKeys");

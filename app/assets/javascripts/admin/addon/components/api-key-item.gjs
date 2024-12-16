@@ -9,7 +9,6 @@ import DropdownMenu from "discourse/components/dropdown-menu";
 import avatar from "discourse/helpers/avatar";
 import formatDate from "discourse/helpers/format-date";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import dIcon from "discourse-common/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import DMenu from "float-kit/components/d-menu";
 
@@ -53,7 +52,9 @@ export default class ApiKeysList extends Component {
       <td class="d-admin-row__overview key">
         {{this.apiKey.truncatedKey}}
         {{#if this.apiKey.revoked_at}}
-          <span class="d-admin-table__badge">{{i18n "admin.api.revoked"}}</span>{{/if}}
+          <span class="d-admin-table__badge">{{i18n
+              "admin.api.revoked"
+            }}</span>{{/if}}
       </td>
       <td class="d-admin-row__detail key-description">
         <div class="d-admin-row__mobile-label">{{i18n
