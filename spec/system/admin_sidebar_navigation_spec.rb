@@ -50,8 +50,10 @@ describe "Admin Revamp | Sidebar Navigation", type: :system do
   it "collapses sections by default" do
     visit("/admin")
     links = page.all(".sidebar-section-link-content-text")
-    expect(links.count).to eq(4)
-    expect(links.map(&:text)).to eq(["Dashboard", "Users", "All Site Settings", "What's New"])
+    expect(links.count).to eq(5)
+    expect(links.map(&:text)).to eq(
+      ["Dashboard", "Users", "Groups", "All Site Settings", "What's New"],
+    )
   end
 
   context "when on mobile" do
