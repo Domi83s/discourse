@@ -11,7 +11,6 @@ import DButton from "discourse/components/d-button";
 import avatar from "discourse/helpers/avatar";
 import formatDate from "discourse/helpers/format-date";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import dIcon from "discourse-common/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import AdminFormRow from "admin/components/admin-form-row";
 import ApiKeyUrlsModal from "admin/components/modal/api-key-urls";
@@ -86,13 +85,13 @@ export default class AdminConfigAreasApiKeysShow extends Component {
 
     <div class="api-key api-key-show">
       <AdminFormRow @label="admin.api.key">
-        {{this.args.apiKey.truncatedKey}}
+        {{@apiKey.truncatedKey}}
       </AdminFormRow>
 
       <AdminFormRow @label="admin.api.description">
         {{#if this.editingDescription}}
           <Input
-            @value={{this.args.apiKey.description}}
+            @value={{@apiKey.description}}
             {{on "input" this.setNewDescription}}
             maxlength="255"
             placeholder={{i18n "admin.api.description_placeholder"}}
@@ -100,8 +99,8 @@ export default class AdminConfigAreasApiKeysShow extends Component {
         {{else}}
           <span>
             {{if
-              this.args.apiKey.description
-              this.args.apiKey.description
+              @apiKey.description
+              @apiKey.description
               (i18n "admin.api.no_description")
             }}
           </span>
@@ -128,10 +127,10 @@ export default class AdminConfigAreasApiKeysShow extends Component {
       </AdminFormRow>
 
       <AdminFormRow @label="admin.api.user">
-        {{#if this.args.apiKey.user}}
-          <LinkTo @route="adminUser" @model={{this.args.apiKey.user}}>
-            {{avatar this.args.apiKey.user imageSize="small"}}
-            {{this.args.apiKey.user.username}}
+        {{#if @apiKey.user}}
+          <LinkTo @route="adminUser" @model={{@apiKey.user}}>
+            {{avatar @apiKey.user imageSize="small"}}
+            {{@apiKey.user.username}}
           </LinkTo>
         {{else}}
           {{i18n "admin.api.all_users"}}
@@ -139,41 +138,41 @@ export default class AdminConfigAreasApiKeysShow extends Component {
       </AdminFormRow>
 
       <AdminFormRow @label="admin.api.created">
-        {{formatDate this.args.apiKey.created_at leaveAgo="true"}}
+        {{formatDate @apiKey.created_at leaveAgo="true"}}
       </AdminFormRow>
 
       <AdminFormRow @label="admin.api.updated">
-        {{formatDate this.args.apiKey.updated_at leaveAgo="true"}}
+        {{formatDate @apiKey.updated_at leaveAgo="true"}}
       </AdminFormRow>
 
       <AdminFormRow @label="admin.api.last_used">
-        {{#if this.args.apiKey.last_used_at}}
-          {{formatDate this.args.apiKey.last_used_at leaveAgo="true"}}
+        {{#if @apiKey.last_used_at}}
+          {{formatDate @apiKey.last_used_at leaveAgo="true"}}
         {{else}}
           {{i18n "admin.api.never_used"}}
         {{/if}}
       </AdminFormRow>
 
       <AdminFormRow @label="admin.api.revoked">
-        {{#if this.args.apiKey.revoked_at}}
-          {{formatDate this.args.apiKey.revoked_at leaveAgo="true"}}
+        {{#if @apiKey.revoked_at}}
+          {{formatDate @apiKey.revoked_at leaveAgo="true"}}
         {{else}}
           <span>{{i18n "no_value"}}</span>
         {{/if}}
         <div class="controls">
-          {{#if this.args.apiKey.revoked_at}}
+          {{#if @apiKey.revoked_at}}
             <DButton
-              @action={{fn this.undoRevokeKey this.args.apiKey}}
+              @action={{fn this.undoRevokeKey @apiKey}}
               @label="admin.api.undo_revoke"
             />
             <DButton
-              @action={{fn this.deleteKey this.args.apiKey}}
+              @action={{fn this.deleteKey @apiKey}}
               @label="admin.api.delete"
               class="btn-danger"
             />
           {{else}}
             <DButton
-              @action={{fn this.revokeKey this.args.apiKey}}
+              @action={{fn this.revokeKey @apiKey}}
               @label="admin.api.revoke"
               class="btn-danger"
             />
@@ -181,7 +180,7 @@ export default class AdminConfigAreasApiKeysShow extends Component {
         </div>
       </AdminFormRow>
 
-      {{#if this.args.apiKey.api_key_scopes.length}}
+      {{#if @apiKey.api_key_scopes.length}}
         <h2 class="scopes-title">{{i18n "admin.api.scopes.title"}}</h2>
 
         <table class="scopes-table grid">
@@ -194,7 +193,7 @@ export default class AdminConfigAreasApiKeysShow extends Component {
             </tr>
           </thead>
           <tbody>
-            {{#each this.args.apiKey.api_key_scopes as |scope|}}
+            {{#each @apiKey.api_key_scopes as |scope|}}
               <tr>
                 <td>{{scope.resource}}</td>
                 <td>
